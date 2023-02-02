@@ -1,72 +1,88 @@
 // TODO: Include packages needed for this application
-var inquirer = require ('inquirer');
-var fs = require ("fs");
-var markdown = require ("./utils/generateMarkdown.js");
-
-var readMe = fs.readFileSync('./utils/generateMarkdown.js', 'utf8');
-console.log(readMe);
+var inquirer = require('inquirer');
+var fs = require("fs");
+var markdown = require("./utils/generateMarkdown.js");
 
 // TODO: Create an array of questions for user input
 const questions = [
     {
         message: "What is the projects name?",
-        title: "title"
+        name: "title",
+        type: "input"
     },
     {
         message: "What is the projects description?",
-        title: "description"
+        name: "description",
+        type: "input"
     },
     {
         message: "What are the installation steps?",
-        title: "installation"
+        name: "installation",
+        type: "input"
     },
     {
         message: "What is the projects use?",
-        title: "use"
+        name: "use",
+        type: "input"
     },
     {
         message: "List any collaberators here",
-        title: "collaberators"
+        name: "collaberators",
+        type: "input"
     },
     {
-        message:  "What is the projects desired licence",
-        title: "license"
+        message: "What is the projects desired licence",
+        name: "license",
+        type: "list",
+        choices: ["MIT", "ISC", "GPL", "APACHE", "2.0", "NO LICENCE"]
     },
     {
         message: "What are the projects features?",
-        title: "features"
+        name: "features",
+        type: "input"
     },
     {
         message: "List any contributors here",
-        title:"contributors"
+        name: "contributors",
+        type: "input"
     },
     {
         message: "For Questions (email)",
-        title: "emailName"
+        name: "emailName",
+        type: "input"
     },
     {
         message: "For Questions (Github)",
-        title: "githubName"
+        name: "githubName",
+        type: "input"
     },
     {
         message: "Does your project contain tests?",
-        title: "tests"
+        name: "tests",
+        type: "input"
     },
 ]
 
 // Create a function to write README file
-function writeToFile(message, title) {
-fs.writeFile(message, title, (err) => {
-    if(err) {
-        return console.log(err);
-    }
-    console.log("README was generated");
-}); 
+function writeToFile(response) {
+    fs.writeFile("README.md",markdown(response), (err) => {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("README was generated");
+    });
 }
 
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    console.log("Welcome to readme generator")
+    inquirer.prompt(questions)
+        .then(response => {
+            console.log(response)
+            writeToFile(response)
+        })
+}
 
 // Function call to initialize app
 init();
