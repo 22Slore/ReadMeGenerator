@@ -15,7 +15,7 @@
   *[githubName](#githubName)
   *[tests](#tests)
   
-  ##LIVE PREVIEW
+  ### LIVE PREVIEW
   go to this file in repo: https://github.com/22Slore/ReadMeGenerator/blob/main/Preview%20README.md%20-%20bootcamp%20-%20Visual%20Studio%20Code%202023-02-02%2014-03-16.mp4
 
 
